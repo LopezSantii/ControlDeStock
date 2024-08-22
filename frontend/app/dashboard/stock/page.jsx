@@ -5,10 +5,11 @@ import { Button } from "@nextui-org/react";
 import NewProductModal from "../../ui/NewProductModal";
 import TableOfStock from "../../ui/TableOfStock";
 import { NewItemIcon } from "../../ui/Icons";
+import { useData } from "../../context/DataContext";
 
 function Page() {
+  const { products, setProducts, setRender } = useData();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [render, setRender] = useState(false);
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -26,9 +27,11 @@ function Page() {
           Agregar Producto
         </Button>
       </div>
-      <TableOfStock setRender={setRender} render={render} />
+      <TableOfStock products={products} setProducts={setProducts} />
       <NewProductModal
         setRender={setRender}
+        products={products}
+        setProducts={setProducts}
         open={isModalOpen}
         close={closeModal}
       />

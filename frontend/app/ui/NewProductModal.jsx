@@ -10,16 +10,15 @@ import {
   Button,
 } from "@nextui-org/react";
 import { addProduct } from "../../js/services";
-import { fetchProducts } from "../../js/services";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-export default function NewProductModal({ open, close, setRender }) {
-  const [productos, setProductos] = useState([]);
-  useEffect(() => {
-    fetchProducts()
-      .then((data) => setProductos(data))
-      .catch((error) => console.error(error));
-  }, []);
+export default function NewProductModal({
+  open,
+  close,
+  products,
+  setProducts,
+  setRender,
+}) {
   // Estado del nuevo producto
   const [nuevoProducto, setNuevoProducto] = useState({
     nombre: "",
@@ -30,18 +29,18 @@ export default function NewProductModal({ open, close, setRender }) {
 
   const handleAddProduct = async () => {
     try {
-      const addedProduct = await addProduct(nuevoProducto, productos);
+      const addedProduct = await addProduct(nuevoProducto, products);
       if (addedProduct) {
-        setProductos(...productos, addedProduct);
+        setProducts([...products, nuevoProducto]);
         setNuevoProducto({
           nombre: "",
           descripcion: "",
           precio: 0,
           cantidad: 0,
         });
+        setRender(true);
         close(); // Cerrar el modal después de agregar el producto
       }
-      setRender(true);
     } catch (error) {
       console.log(error);
     }

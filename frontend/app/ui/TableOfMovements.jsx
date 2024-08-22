@@ -18,8 +18,6 @@ import {
 export default function TableOfMovements({ movements, setMovements }) {
   const [page, setPage] = useState(1);
   const pages = useMemo(() => calculatePages(movements), [movements]);
-
-  // Memoriza los productos actuales para la página actual
   const currentProducts = useMemo(
     () => GetcurrentProducts(page, movements),
     [page, movements]

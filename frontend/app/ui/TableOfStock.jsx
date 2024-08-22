@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import { TrashIcon } from "./Icons";
 import {
   calculatePages,
@@ -13,23 +13,14 @@ import {
   TableRow,
   TableCell,
   Pagination,
-  Button,
 } from "@nextui-org/react";
-import { fetchProducts } from "../../js/services";
 
-export default function TableOfStock({ render, setRender }) {
-  const [productos, setProductos] = useState([]);
-  useEffect(() => {
-    fetchProducts()
-      .then((data) => setProductos(data))
-      .catch((error) => console.error(error));
-  }, [render === true]);
-
+export default function TableOfStock({ products, setProducts }) {
   const [page, setPage] = useState(1);
-  const pages = useMemo(() => calculatePages(productos), [productos]);
+  const pages = useMemo(() => calculatePages(products), [products]);
   const currentProducts = useMemo(
-    () => GetcurrentProducts(page, productos),
-    [page, productos]
+    () => GetcurrentProducts(page, products),
+    [page, products]
   );
 
   return (
@@ -74,7 +65,7 @@ export default function TableOfStock({ render, setRender }) {
                 <button
                   className="text-violet-500"
                   onClick={() =>
-                    handleDelete(producto.id, setProductos, productos)
+                    handleDelete(producto.id, setProducts, products)
                   }
                 >
                   <TrashIcon />

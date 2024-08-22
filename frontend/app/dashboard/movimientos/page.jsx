@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import { useState, useMemo } from "react";
 import {
   Autocomplete,
   AutocompleteItem,
@@ -14,26 +14,13 @@ import {
 import { SearchIcon, FilterIcon, MovementIcon } from "../../ui/Icons";
 import TableOfMovements from "../../ui/TableOfMovements";
 import RegisterMovementModal from "../../ui/RegisterMovementModal";
-import { fetchMovements, fetchProducts } from "../../../js/services";
 import { filterMovementsByDate } from "../../../js/utils";
+import { useData } from "../../context/DataContext";
 
 function Page() {
-  const [movements, setMovements] = useState([]);
-  const [products, setProducts] = useState([]);
+  const { movements, setMovements, products, setRender } = useData();
   const [dateRange, setDateRange] = useState(null);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  useEffect(() => {
-    fetchMovements()
-      .then((data) => setMovements(data))
-      .catch((error) => console.error(error));
-
-    fetchProducts()
-      .then((data) => setProducts(data))
-      .catch((error) => console.error(error));
-  }, []);
-  const handleMovementAdded = (newMovement) => {
-    setMovements([...movements, newMovement]);
-  };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => {
@@ -107,7 +94,9 @@ function Page() {
         movements={filteredMovements}
       />
       <RegisterMovementModal
-        handleMovementAdded={handleMovementAdded}
+        setRender={setRender}
+        movements={movements}
+        setMovements={setMovements}
         productos={products}
         open={isModalOpen}
         close={closeModal}

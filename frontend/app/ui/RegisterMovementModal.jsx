@@ -18,7 +18,9 @@ export default function RegisterMovementModal({
   open,
   close,
   productos,
-  handleMovementAdded,
+  setMovements,
+  movements,
+  setRender,
 }) {
   const [producto, setProducto] = useState({
     producto_id: "",
@@ -29,12 +31,13 @@ export default function RegisterMovementModal({
   const handleFormSubmit = async () => {
     const addedNewMovement = await addMovement(producto);
     if (addedNewMovement) {
-      handleMovementAdded(producto);
+      setMovements([...movements, producto]);
       setProducto({
         producto_id: "",
         tipo: "",
         cantidad: 0,
       });
+      setRender(true);
       close();
     }
   };
