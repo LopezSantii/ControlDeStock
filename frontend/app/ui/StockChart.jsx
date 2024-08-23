@@ -5,7 +5,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 // Registramos los componentes que vamos a utilizar en Chart.js
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export const StockMovementChart = ({ data }) => {
+export const StockChart = ({ data }) => {
   // Procesamos los datos para el gráfico
   const labels = data.map(({ nombre }) => nombre);
   const quantities = data.map(({ cantidad }) => cantidad);
@@ -18,19 +18,19 @@ export const StockMovementChart = ({ data }) => {
         label: "Movimientos de Stock",
         data: quantities,
         backgroundColor: [
-          "rgba(75, 192, 192, 0.8)",
-          "rgba(153, 102, 255, 0.8)",
-          "rgba(255, 159, 64, 0.8)",
-          "rgba(255, 99, 132, 0.8)",
-          "rgba(54, 162, 235, 0.8)",
-          "rgba(255, 206, 86, 0.8)",
-          "rgba(201, 203, 207, 0.8)",
-          "rgba(255, 99, 132,0.8)",
-          "rgba(75, 192, 192, 0.8)",
-          "rgba(153, 102, 255, 0.8)",
-          "rgba(255, 159, 64, 0.8)",
-          "rgba(255, 99, 132, 0.8)",
-          "rgba(54, 162, 235, 0.8)",
+          "rgba(75, 192, 192, 0.7)",
+          "rgba(153, 102, 255, 0.7)",
+          "rgba(255, 159, 64, 0.7)",
+          "rgba(255, 99, 132, 0.7)",
+          "rgba(54, 162, 235, 0.7)",
+          "rgba(255, 206, 86, 0.7)",
+          "rgba(201, 203, 207, 0.7)",
+          "rgba(255, 99, 132,0.7)",
+          "rgba(75, 192, 192, 0.7)",
+          "rgba(153, 102, 255, 0.7)",
+          "rgba(255, 159, 64, 0.7)",
+          "rgba(255, 99, 132, 0.7)",
+          "rgba(54, 162, 235, 0.7)",
         ],
         borderColor: ["rgba(0, 0, 0,0.4)"],
         borderWidth: 1,
@@ -46,7 +46,7 @@ export const StockMovementChart = ({ data }) => {
       legend: {
         fullSize: true,
         aling: "center",
-        position: "bottom",
+        position: "right",
         labels: {
           boxWidth: 10,
           padding: 6,

@@ -1,13 +1,14 @@
+"use client";
+
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Divider } from "@nextui-org/react";
 import { StockIcon, MovementIcon, DashboardIcon } from "./Icons";
 
 export default function SideNav() {
   const pathName = usePathname();
 
   return (
-    <div className="bg-secondary-500 text-white flex h-full flex-col">
+    <div className="bg-navbar text-white flex h-full flex-col">
       <Link
         className={`flex flex-row items-center gap-4 p-3 ${
           pathName === "/dashboard" ? "bg-white text-secondary-500" : ""
@@ -19,20 +20,18 @@ export default function SideNav() {
       </Link>
       <Link
         className={`flex flex-row items-center gap-4 p-3 ${
-          pathName === "/dashboard/stock" ? "bg-white text-secondary-500" : ""
+          pathName === "/stock" ? "bg-white text-secondary-500" : ""
         }`}
-        href={"/dashboard/stock"}
+        href={"/stock"}
       >
         <StockIcon />
         <p>Stock</p>
       </Link>
       <Link
         className={`flex flex-row items-center gap-4 p-3 ${
-          pathName === "/dashboard/movimientos"
-            ? "bg-white text-secondary-500"
-            : ""
+          pathName === "/movimientos" ? "bg-white text-secondary-500" : ""
         }`}
-        href={"/dashboard/movimientos"}
+        href={"/movimientos"}
       >
         <MovementIcon />
         <p>Movimientos</p>

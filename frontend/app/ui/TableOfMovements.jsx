@@ -18,9 +18,15 @@ import {
 export default function TableOfMovements({ movements, setMovements }) {
   const [page, setPage] = useState(1);
   const pages = useMemo(() => calculatePages(movements), [movements]);
+
+  const sortedMovements = useMemo(
+    () => [...movements].sort((a, b) => new Date(b.fecha) - new Date(a.fecha)),
+    [movements]
+  );
+
   const currentProducts = useMemo(
-    () => GetcurrentProducts(page, movements),
-    [page, movements]
+    () => GetcurrentProducts(page, sortedMovements),
+    [page, sortedMovements]
   );
 
   return (
